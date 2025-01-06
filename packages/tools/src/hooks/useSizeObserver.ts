@@ -2,7 +2,7 @@
  * @Author: zdd
  * @Date: 2024-09-20 11:20:58
  * @LastEditors: zdd dongdong@grizzlychina.com
- * @LastEditTime: 2025-01-06 11:37:49
+ * @LastEditTime: 2025-01-06 16:42:18
  * @FilePath: useSizeObserver.ts
  */
 
@@ -12,16 +12,13 @@ type ParentElement = Pick<HTMLElement, "querySelector" | "querySelectorAll">;
 
 export function useProTableSizeObserver<T>(
   actionRef: RefObject<T>,
-  {
-    totalHeight,
-    wrapId,
-    bottom,
-  }: {
+  options?: {
     wrapId?: string;
     totalHeight?: string;
     bottom?: number;
   }
 ) {
+  let { totalHeight, wrapId, bottom } = options ?? {};
   totalHeight ??= "100vh";
   bottom ??= 32;
   const [searchH, setSearchH] = useState<number>(80);

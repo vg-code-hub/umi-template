@@ -2,7 +2,7 @@
  * @Author: zdd
  * @Date: 2025-01-06 13:59:01
  * @LastEditors: zdd dongdong@grizzlychina.com
- * @LastEditTime: 2025-01-06 14:49:02
+ * @LastEditTime: 2025-01-06 16:58:14
  * @FilePath: .umirc.ts
  */
 import { defineConfig } from "umi";
@@ -22,6 +22,28 @@ export default defineConfig({
       name: "文档",
       icon: "https://frontend-projects-assets.oss-cn-hangzhou.aliyuncs.com/static/schedule/layout_transport.png",
       access: "access-docs",
+    },
+    {
+      path: "/table",
+      name: "表格",
+      icon: "https://frontend-projects-assets.oss-cn-hangzhou.aliyuncs.com/static/schedule/layout_emergency.png",
+      routes: [
+        {
+          path: "query_table",
+          component: "table/query_table",
+          name: "查询表格",
+        },
+        {
+          path: "no_query_table",
+          component: "table/no_query_table",
+          name: "无查询表单",
+        },
+        // {
+        //   path: "query_table",
+        //   component: "table/query_table",
+        //   name: "查询表格",
+        // },
+      ],
     },
   ],
   plugins: [

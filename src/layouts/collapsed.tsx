@@ -2,10 +2,10 @@
  * @Author: zdd
  * @Date: 2025-01-06 14:29:34
  * @LastEditors: zdd dongdong@grizzlychina.com
- * @LastEditTime: 2025-01-06 14:34:43
+ * @LastEditTime: 2025-01-06 16:52:22
  * @FilePath: collapsed.tsx
  */
-import { DoubleRightOutlined } from "@ant-design/icons";
+import { DoubleLeftOutlined, DoubleRightOutlined } from "@ant-design/icons";
 
 interface LayoutCollapsedProps {
   collapsed?: boolean;
@@ -20,9 +20,15 @@ const LayoutCollapsed: React.FC<LayoutCollapsedProps> = (props) => {
       }}
     >
       <div className="pl-[20px]">
-        <DoubleRightOutlined
-          onClick={() => props.setCollapsed(!props.collapsed)}
-        />
+        {props.collapsed ? (
+          <DoubleLeftOutlined
+            onClick={() => props.setCollapsed(!props.collapsed)}
+          />
+        ) : (
+          <DoubleRightOutlined
+            onClick={() => props.setCollapsed(!props.collapsed)}
+          />
+        )}
       </div>
     </div>
   );

@@ -2,8 +2,8 @@
  * @Author: zdd
  * @Date: 2025-01-06 14:10:34
  * @LastEditors: zdd dongdong@grizzlychina.com
- * @LastEditTime: 2025-01-06 14:23:31
- * @FilePath: auto_update_notify.tsx
+ * @LastEditTime: 2025-01-06 16:49:31
+ * @FilePath: auto_update.tsx
  */
 import { ReloadOutlined } from "@ant-design/icons";
 import { message } from "antd";
@@ -63,6 +63,7 @@ function createUpdateContent(props: UpdateContentProps = {}): React.ReactNode {
     })
   );
 }
+
 function autoUpdateNotify() {
   setInterval(async () => {
     try {
