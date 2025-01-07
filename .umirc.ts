@@ -2,13 +2,18 @@
  * @Author: zdd
  * @Date: 2025-01-06 13:59:01
  * @LastEditors: zdd dongdong@grizzlychina.com
- * @LastEditTime: 2025-01-06 16:58:14
+ * @LastEditTime: 2025-01-07 14:05:09
  * @FilePath: .umirc.ts
  */
 import { defineConfig } from "umi";
 
 export default defineConfig({
   routes: [
+    {
+      path: "login",
+      layout: false,
+      component: "./login",
+    },
     {
       path: "/",
       component: "index",
@@ -38,11 +43,11 @@ export default defineConfig({
           component: "table/no_query_table",
           name: "无查询表单",
         },
-        // {
-        //   path: "query_table",
-        //   component: "table/query_table",
-        //   name: "查询表格",
-        // },
+        {
+          path: "nested_table",
+          component: "table/nested_table",
+          name: "嵌套表格",
+        },
       ],
     },
   ],
