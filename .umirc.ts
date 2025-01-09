@@ -2,7 +2,7 @@
  * @Author: zdd
  * @Date: 2025-01-06 13:59:01
  * @LastEditors: zdd dongdong@grizzlychina.com
- * @LastEditTime: 2025-01-07 14:05:09
+ * @LastEditTime: 2025-01-08 15:03:40
  * @FilePath: .umirc.ts
  */
 import { defineConfig } from "umi";
@@ -16,6 +16,10 @@ export default defineConfig({
     },
     {
       path: "/",
+      redirect: "/home",
+    },
+    {
+      path: "/home",
       component: "index",
       name: "首页",
       icon: "https://frontend-projects-assets.oss-cn-hangzhou.aliyuncs.com/static/schedule/layout_schedule.png",
@@ -50,6 +54,7 @@ export default defineConfig({
         },
       ],
     },
+    { path: "*", component: "404" },
   ],
   plugins: [
     "@umijs/plugins/dist/antd",

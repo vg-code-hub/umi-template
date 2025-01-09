@@ -9,6 +9,7 @@
     "start": "npm run dev"
   },
   "dependencies": {
+    "lodash-es": "^4.17.21",
     "qrcode.react": "^4.2.0",
     "tools": "workspace:*",
     "umi": "^4.4.4"
@@ -17,6 +18,8 @@
     "@alita/plugins": "^3.5.3",
     "@ant-design/icons": "^4.8.3",
     "@ant-design/pro-components": "^2.7.19",
+    "@ant-design/pro-layout": "^7.22.0",
+    "@types/lodash-es": "^4.17.12",
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
     "@umijs/lint": "^4.4.4",
