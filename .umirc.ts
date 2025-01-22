@@ -2,7 +2,7 @@
  * @Author: zdd
  * @Date: 2025-01-06 13:59:01
  * @LastEditors: zdd dongdong@grizzlychina.com
- * @LastEditTime: 2025-01-08 15:03:40
+ * @LastEditTime: 2025-01-22 15:35:17
  * @FilePath: .umirc.ts
  */
 import { defineConfig } from "umi";
@@ -51,6 +51,11 @@ export default defineConfig({
           path: "nested_table",
           component: "table/nested_table",
           name: "嵌套表格",
+        },
+        {
+          path: "crud_table",
+          component: "table/crud_table",
+          name: "CRUD 表格",
         },
       ],
     },

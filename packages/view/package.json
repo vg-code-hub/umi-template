@@ -1,0 +1,15 @@
+{
+  "name": "u-view",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "tools": "workspace:*"
+  }
+}
