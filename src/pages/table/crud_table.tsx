@@ -4,9 +4,9 @@ import type {
   ProFormColumnsType,
   ProSchemaComponentTypes,
 } from "@ant-design/pro-components";
-import { Button, Space, Tag } from "antd";
+import { Button, Space, Tag, Typography } from "antd";
 import type { ProCrudDetailProps, ProCrudFormProps } from "u-view";
-import { ProCrud, ProCrudDetail, ProCrudForm, ProLinkText } from "u-view";
+import { ProCrud, ProCrudDetail, ProCrudForm } from "u-view";
 import { request } from "umi";
 
 type GithubIssueItem = {
@@ -42,24 +42,34 @@ const columns: Partial<
     copyable: true,
     ellipsis: true,
     search: false,
-    // width: "550px",
+    // width: 350,
     render: (
-      _: any,
+      dom: any,
       row: GithubIssueItem,
       index: number,
       action: any,
       schema: { type: ProSchemaComponentTypes }
     ) => {
       if (schema.type === "descriptions") return row.title;
-
       return (
         <ProCrudDetail
           {...detailProps}
           dataSource={row}
           trigger={
-            <Button type="link" style={{ height: "min-content" }}>
-              <ProLinkText>{row.title}</ProLinkText>
-            </Button>
+            <Typography.Paragraph
+              className="text-primary cursor-default whitespace-pre-wrap !mb-0"
+              ellipsis={{
+                rows: 2,
+                expandable: "collapsible",
+                onExpand: (e) => {
+                  e.stopPropagation();
+                },
+              }}
+              copyable
+              title={row.title}
+            >
+              {row.title}
+            </Typography.Paragraph>
           }
         />
       );
