@@ -2,7 +2,7 @@
  * @Author: zdd
  * @Date: 2025-01-06 13:59:01
  * @LastEditors: zdd dongdong@grizzlychina.com
- * @LastEditTime: 2025-01-22 15:35:17
+ * @LastEditTime: 2025-01-23 14:35:40
  * @FilePath: .umirc.ts
  */
 import { defineConfig } from "umi";
@@ -80,7 +80,7 @@ export default defineConfig({
   tailwindcss: {},
   antd: {},
   layout: {
-    title: "umi-demo",
+    title: "umi-template",
   },
   valtio: {},
   request: {},
