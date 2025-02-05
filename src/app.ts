@@ -2,7 +2,7 @@
  * @Author: zdd
  * @Date: 2025-01-06 14:10:34
  * @LastEditors: zdd dongdong@grizzlychina.com
- * @LastEditTime: 2025-01-22 15:58:03
+ * @LastEditTime: 2025-02-05 14:39:43
  * @FilePath: app.ts
  */
 import React, { useEffect, useState } from "react";
@@ -11,7 +11,7 @@ import { defineApp, history, RunTimeLayoutConfig, useModel } from "umi";
 import Avator from "./layouts/avatar";
 import LayoutCollapsed from "./layouts/collapsed";
 import type { DynamicRoutes } from "./dynamicRoutes.d";
-import { parseRoutes, rebuildRedirect } from "./dynamicRoutes";
+import { rebuildRedirect } from "./dynamicRoutes";
 import "./auto_update";
 import { getRole } from "./models/user";
 
@@ -60,17 +60,8 @@ export const request = {
   timeout: 30000,
 };
 
-export function patchRoutes({
-  routes,
-  routeComponents,
-}: DynamicRoutes.ParseRoutesReturnType) {
-  if (window.dynamicRoutes) {
-    const currentRouteIndex = Object.keys(routes).length;
-    const parsedRoutes = parseRoutes(window.dynamicRoutes, currentRouteIndex);
-    Object.assign(routes, parsedRoutes.routes); // 参数传递的为引用类型，直接操作原对象，合并路由数据
-    Object.assign(routeComponents, parsedRoutes.routeComponents); // 合并组件
-  }
-
+export function patchRoutes({ routes }: DynamicRoutes.ParseRoutesReturnType) {
   rebuildRedirect(routes);
-  console.log("patchRoutes", routes);
+
+  console.log({ routes });
 }
