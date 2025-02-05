@@ -1,0 +1,145 @@
+/*
+ * @Author: zdd
+ * @Date: 2025-01-23 17:45:50
+ * @LastEditors: zdd dongdong@grizzlychina.com
+ * @LastEditTime: 2025-02-05 14:07:33
+ * @FilePath: dynamicRoutes.ts
+ */
+export default {
+  "POST /api/system/routes/admin": {
+    code: 200,
+    msg: "请求成功",
+    data: [
+      {
+        path: "/",
+        redirect: "/home",
+      },
+      {
+        id: 1,
+        menuId: "home",
+        parentId: "",
+        name: "首页",
+        sort: 1000,
+        path: "/home",
+        component: "index",
+        icon: "https://frontend-projects-assets.oss-cn-hangzhou.aliyuncs.com/static/schedule/layout_schedule.png",
+      },
+      {
+        id: 2,
+        menuId: "docs",
+        parentId: "",
+        name: "文档",
+        sort: 2000,
+        path: "/docs",
+        component: "docs",
+        icon: "https://frontend-projects-assets.oss-cn-hangzhou.aliyuncs.com/static/schedule/layout_transport.png",
+      },
+      {
+        id: 3,
+        menuId: "table",
+        parentId: "",
+        name: "表格",
+        sort: 2000,
+        path: "/table",
+        icon: "https://frontend-projects-assets.oss-cn-hangzhou.aliyuncs.com/static/schedule/layout_emergency.png",
+      },
+      {
+        id: 4,
+        menuId: "user_management",
+        parentId: "table",
+        name: "查询表格",
+        sort: 2001,
+        path: "/table/query_table",
+        component: "table/query_table",
+      },
+      {
+        id: 5,
+        menuId: "no_query_table",
+        parentId: "table",
+        name: "无查询表单",
+        sort: 2002,
+        path: "/table/no_query_table",
+        component: "table/no_query_table",
+      },
+      {
+        id: 6,
+        menuId: "nested_table",
+        parentId: "table",
+        name: "嵌套表格",
+        sort: 2003,
+        path: "/table/nested_table",
+        component: "table/nested_table",
+      },
+      {
+        id: 7,
+        menuId: "crud_table",
+        parentId: "table",
+        name: "CRUD 表格",
+        sort: 2004,
+        path: "/table/crud_table",
+        component: "table/crud_table",
+      },
+      {
+        id: 8,
+        parentId: "table",
+        sort: 2005,
+        path: "",
+        redirect: "/table/query_table",
+      },
+    ],
+  },
+  "POST /api/system/routes/guest": {
+    code: 200,
+    msg: "请求成功",
+    data: [
+      {
+        path: "/",
+        redirect: "/docs",
+      },
+      {
+        id: 2,
+        menuId: "docs",
+        parentId: "",
+        name: "文档",
+        sort: 2000,
+        path: "/docs",
+        component: "docs",
+        icon: "https://frontend-projects-assets.oss-cn-hangzhou.aliyuncs.com/static/schedule/layout_transport.png",
+      },
+      {
+        id: 3,
+        menuId: "table",
+        parentId: "",
+        name: "表格",
+        sort: 2000,
+        path: "/table",
+        icon: "https://frontend-projects-assets.oss-cn-hangzhou.aliyuncs.com/static/schedule/layout_emergency.png",
+      },
+      {
+        id: 5,
+        menuId: "no_query_table",
+        parentId: "table",
+        name: "无查询表单",
+        sort: 2002,
+        path: "/table/no_query_table",
+        component: "table/no_query_table",
+      },
+      {
+        id: 7,
+        menuId: "crud_table",
+        parentId: "table",
+        name: "CRUD 表格",
+        sort: 2004,
+        path: "/table/crud_table",
+        component: "table/crud_table",
+      },
+      {
+        id: 8,
+        parentId: "table",
+        sort: 2005,
+        path: "",
+        redirect: "/table/no_query_table",
+      },
+    ],
+  },
+};

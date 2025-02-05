@@ -2,24 +2,48 @@
  * @Author: zdd
  * @Date: 2025-01-06 14:10:34
  * @LastEditors: zdd dongdong@grizzlychina.com
- * @LastEditTime: 2025-01-22 15:58:03
+ * @LastEditTime: 2025-02-05 13:57:23
  * @FilePath: app.ts
  */
 import React, { useEffect, useState } from "react";
 import { message } from "antd";
-import { defineApp, history, RunTimeLayoutConfig, useModel } from "umi";
+import {
+  defineApp,
+  RuntimeConfig,
+  history,
+  RunTimeLayoutConfig,
+  useModel,
+} from "umi";
 import Avator from "./layouts/avatar";
 import LayoutCollapsed from "./layouts/collapsed";
 import type { DynamicRoutes } from "./dynamicRoutes.d";
 import { parseRoutes, rebuildRedirect } from "./dynamicRoutes";
 import "./auto_update";
 import { getRole } from "./models/user";
+import { find } from "lodash-es";
+import access from "./access";
 
 message.config({
   top: 80,
   duration: 1,
   maxCount: 1,
 });
+
+async function fetchDynamicRoutes() {
+  try {
+    const role = getRole();
+    if (!role) return;
+    const { data: routesData } = await fetch(`/api/system/routes/${role}`, {
+      method: "POST",
+    }).then((res) => res.json());
+    if (routesData) {
+      window.dynamicRoutes = routesData;
+    }
+  } catch {
+    message.error("路由加载失败");
+  }
+}
+await fetchDynamicRoutes();
 
 export type InitialState = {
   role?: string;
@@ -65,12 +89,12 @@ export function patchRoutes({
   routeComponents,
 }: DynamicRoutes.ParseRoutesReturnType) {
   if (window.dynamicRoutes) {
-    const currentRouteIndex = Object.keys(routes).length;
-    const parsedRoutes = parseRoutes(window.dynamicRoutes, currentRouteIndex);
-    Object.assign(routes, parsedRoutes.routes); // 参数传递的为引用类型，直接操作原对象，合并路由数据
+    const routeKeys = Object.keys(routes)
+      .filter((key) => parseInt(key) > 0)
+      .map(parseInt);
+    const beginIdx = routeKeys[routeKeys.length - 1] + 1;
+    const parsedRoutes = parseRoutes(window.dynamicRoutes, beginIdx);
+    Object.assign(routes, parsedRoutes.routes); // 直接操作原对象，合并路由数据
     Object.assign(routeComponents, parsedRoutes.routeComponents); // 合并组件
   }
-
-  rebuildRedirect(routes);
-  console.log("patchRoutes", routes);
 }

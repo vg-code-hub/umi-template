@@ -1,31 +1,15 @@
+/*
+ * @Author: zdd
+ * @Date: 2025-01-08 14:49:33
+ * @LastEditors: zdd dongdong@grizzlychina.com
+ * @LastEditTime: 2025-02-05 14:04:13
+ * @FilePath: dynamicRoutes.ts
+ */
 import access from "@/access";
 import type { DynamicRoutes } from "./dynamicRoutes.d";
 import { lazy } from "react";
 import { Outlet } from "umi";
 import { find } from "lodash-es";
-
-export function formatRoutePath(path: string) {
-  const words = path.replace(/^\//, "").split(/(?<=\w+)\//); // 提取路径单词
-  return `/${words
-    .map((word: string) =>
-      word.toLowerCase().replace(word[0], word[0].toUpperCase())
-    )
-    .join("/")}`;
-}
-
-export function generateRoutePath(path: string) {
-  return path.toLowerCase();
-}
-
-export function generateComponentPath(path: string) {
-  const words = path.replace(/^\//, "").split(/(?<=\w+)\//); // 提取路径单词
-  return `${words.join("/pages/")}/index`;
-}
-
-export function generateFilePath(path: string) {
-  const words = path.replace(/^\//, "").split(/(?<=\w+)\//);
-  return `@/pages/${words.join("/pages/")}/index.tsx`;
-}
 
 export function parseRoutes(
   routesRaw: DynamicRoutes.RouteRaw[],
@@ -39,75 +23,54 @@ export function parseRoutes(
 
   routesRaw.forEach((route) => {
     let effectiveRoute = true; // 当前处理中的路由是否有效
-
-    const formattedRoutePath = formatRoutePath(route.path); // 将服务器返回的路由路径中的单词转换为首字母大写其余小写
-    const routePath = generateRoutePath(formattedRoutePath); // 全小写的路由路径
-    const componentPath = generateComponentPath(formattedRoutePath); // 组件路径 不含 @/pages/
-    const filePath = generateFilePath(formattedRoutePath); // 路由信息中的组件文件路径
+    const routePath = route.path; // 全小写的路由路径
+    const componentPath = route.component; // 组件路径 不含 @/pages/
 
     // 是否为直接显示（不含子路由）的路由记录，如：/home; /Dashboard
-    if (route.direct) {
+    if (!route.parentId) {
       // 生成路由信息
       const tempRoute: DynamicRoutes.Route = {
         id: currentIdx.toString(),
-        parentId: "ant-design-pro-layout",
+        parentId: "@@/global-layout",
         name: route.name,
         path: routePath,
-        file: filePath,
-      };
-      // 存储路由信息
-      routes[currentIdx] = tempRoute;
+        icon: route.icon,
+      }; // 存储路由信息
+      if (route.redirect) {
+        tempRoute["redirect"] = route.redirect;
+      }
+      routes[currentIdx] = tempRoute; // 生成组件
 
-      // 生成组件
-      const tempComponent = lazy(() => import(`@/pages/${componentPath}`));
-      // 存储组件
+      const tempComponent = route.component
+        ? lazy(() => import(`@/pages/${componentPath}`))
+        : Outlet; // 存储组件
       routeComponents[currentIdx] = tempComponent;
+      routeParentMap.set(route.menuId, currentIdx);
     } else {
-      // 判断是否非一级路由
-      if (!route.parentId) {
-        // 正在处理的项为一级路由
+      // 非一级路由
+      // 获取父级路由ID
+      const realParentId = routeParentMap.get(route.parentId);
+
+      if (realParentId) {
         // 生成路由信息
         const tempRoute: DynamicRoutes.Route = {
           id: currentIdx.toString(),
-          parentId: "ant-design-pro-layout",
+          parentId: realParentId.toString(),
           name: route.name,
           path: routePath,
-        };
-        // 存储路由信息
-        routes[currentIdx] = tempRoute;
-
-        // 一级路由没有它自己的页面，这里生成一个Outlet用于显示子路由页面
-        const tempComponent = Outlet;
-        // 存储Outlet
-        routeComponents[currentIdx] = tempComponent;
-
-        // 记录菜单ID与当前项下标的映射
-        routeParentMap.set(route.menuId, currentIdx);
-      } else {
-        // 非一级路由
-        // 获取父级路由ID
-        const realParentId = routeParentMap.get(route.parentId);
-
-        if (realParentId) {
-          // 生成路由信息
-          const tempRoute: DynamicRoutes.Route = {
-            id: currentIdx.toString(),
-            parentId: realParentId.toString(),
-            name: route.name,
-            path: routePath,
-            file: filePath,
-          };
-          // 存储路由信息
-          routes[currentIdx] = tempRoute;
-
-          // 生成组件
-          const tempComponent = lazy(() => import(`@/pages/${componentPath}`));
-          // 存储组件
-          routeComponents[currentIdx] = tempComponent;
-        } else {
-          // 找不到父级路由，路由无效，workingIdx不自增
-          effectiveRoute = false;
+        }; // 存储路由信息
+        if (route.redirect) {
+          tempRoute["redirect"] = route.redirect;
         }
+        routes[currentIdx] = tempRoute; // 生成组件
+
+        const tempComponent = componentPath
+          ? lazy(() => import(`@/pages/${componentPath}`))
+          : Outlet; // 存储组件
+        routeComponents[currentIdx] = tempComponent;
+      } else {
+        // 找不到父级路由，路由无效，workingIdx不自增
+        effectiveRoute = false;
       }
     }
 
@@ -123,9 +86,9 @@ export function parseRoutes(
   };
 }
 
-const baseRoutesCount = 2;
+const baseRoutesCount = 4;
 
-export function rebuildRedirect(routes: DynamicRoutes.ParsedRoutes) {
+export function rebuildRedirect(routes: any) {
   const ac: any = access();
   Object.keys(routes).forEach((key: any) => {
     let r = routes[key] as any;
@@ -135,7 +98,6 @@ export function rebuildRedirect(routes: DynamicRoutes.ParsedRoutes) {
   });
   const key = Object.keys(routes)[baseRoutesCount];
   const first = routes[key];
-
   const rr: any[] = [];
   const rr2: any[] = [],
     deleteIds: any[] = [];
