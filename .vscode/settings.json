@@ -1,0 +1,29 @@
+{
+  // 开启自动保存格式化
+  "editor.formatOnSave": true,
+
+  // 设置 Prettier 为默认格式化工具
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // 针对 JavaScript 和 React 的特定设置
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.fontWeight": "400",
+  "svg.preview.background": "transparent"
+}

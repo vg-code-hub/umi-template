@@ -2,12 +2,12 @@
  * @Author: zdd
  * @Date: 2023-05-17 15:58:43
  * @LastEditors: zdd dongdong@grizzlychina.com
- * @LastEditTime: 2025-01-08 14:12:08
+ * @LastEditTime: 2025-02-27 10:59:02
  * @FilePath: 404.tsx
  * @Description:
  */
 import { Button, Result } from "antd";
-import { history, IRoute } from "umi";
+import { history } from "umi";
 
 const NoFoundPage = () => {
   return (

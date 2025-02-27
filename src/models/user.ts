@@ -2,11 +2,15 @@
  * @Author: zdd
  * @Date: 2025-01-07 21:26:43
  * @LastEditors: zdd dongdong@grizzlychina.com
- * @LastEditTime: 2025-01-08 16:38:47
+ * @LastEditTime: 2025-02-27 11:15:01
  * @FilePath: user.ts
  */
-import { useState, useCallback, useEffect, useMemo } from "react";
-import { useModel, history, useAccess } from "umi";
+import { useCallback, useEffect, useState } from "react";
+import { history, useModel } from "umi";
+
+export const getRole = () => localStorage.getItem("role") ?? "";
+export const setRole = (role?: string) =>
+  localStorage.setItem("role", role ?? "");
 
 export default function useAuthModel() {
   const [user, setUser] = useState<string | undefined>(getRole());
@@ -40,7 +44,3 @@ export default function useAuthModel() {
     signout,
   };
 }
-
-export const getRole = () => localStorage.getItem("role") ?? "";
-export const setRole = (role?: string) =>
-  localStorage.setItem("role", role ?? "");

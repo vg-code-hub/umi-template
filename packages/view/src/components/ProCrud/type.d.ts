@@ -6,14 +6,13 @@
  * @FilePath: type.d.ts
  */
 import type {
-  ActionType,
-  ProColumns,
-  ProFormColumnsType,
-  ProDescriptionsItemProps,
-  ProTableProps,
-  ProDescriptionsProps,
   DrawerFormProps,
   ModalFormProps,
+  ProColumns,
+  ProDescriptionsItemProps,
+  ProDescriptionsProps,
+  ProFormColumnsType,
+  ProTableProps,
 } from "@ant-design/pro-components";
 
 /** @name 列配置能力 */

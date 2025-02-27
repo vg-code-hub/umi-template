@@ -2,8 +2,8 @@ import { DownOutlined } from "@ant-design/icons";
 import type { ActionType, ProColumns } from "@ant-design/pro-components";
 import { ProTable, TableDropdown } from "@ant-design/pro-components";
 import { Button } from "antd";
-import { useProTableSizeObserver } from "tools";
 import { useRef } from "react";
+import { useProTableSizeObserver } from "tools";
 
 const valueEnum = {
   0: "close",

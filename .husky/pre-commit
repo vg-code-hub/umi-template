@@ -1,0 +1,14 @@
+###
+# @Author: zdd
+# @Date: 2025-02-27 10:51:29
+# @LastEditors: zdd dongdong@grizzlychina.com
+# @LastEditTime: 2025-02-27 10:53:39
+# @FilePath: pre-commit
+###
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# npx lint-staged
+
+# disable reporting on warnings
+pnpm lint --quiet

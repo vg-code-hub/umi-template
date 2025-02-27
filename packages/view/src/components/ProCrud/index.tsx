@@ -13,11 +13,11 @@ import type {
   ProFormInstanceType,
 } from "@ant-design/pro-components";
 import { ProTable } from "@ant-design/pro-components";
-import { useProTableSizeObserver } from "tools";
 import React, { useEffect, useRef, useState } from "react";
-import type { ProCrudFormProps, ProCrudProps, RecordType } from "./type";
+import { useProTableSizeObserver } from "tools";
 import ProCrudDetail from "./detail";
 import ProCrudForm from "./form";
+import type { ProCrudProps, RecordType } from "./type";
 export * from "./type.d";
 
 export { ProCrudDetail, ProCrudForm };
@@ -52,7 +52,7 @@ export default <
   Params extends RecordType = RecordType,
   ValueType = "text",
 >(
-  props: ProCrudProps<T, Params, ValueType>
+  props: ProCrudProps<T, Params, ValueType>,
 ) => {
   const _actionRef = useRef<ActionType>();
   const formRef = useRef<ProFormInstanceType<T>>();

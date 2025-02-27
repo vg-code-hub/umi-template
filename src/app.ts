@@ -2,17 +2,17 @@
  * @Author: zdd
  * @Date: 2025-01-06 14:10:34
  * @LastEditors: zdd dongdong@grizzlychina.com
- * @LastEditTime: 2025-02-05 14:39:43
+ * @LastEditTime: 2025-02-27 13:12:48
  * @FilePath: app.ts
  */
-import React, { useEffect, useState } from "react";
 import { message } from "antd";
-import { defineApp, history, RunTimeLayoutConfig, useModel } from "umi";
+import React, { useState } from "react";
+import { history, RunTimeLayoutConfig } from "umi";
+import "./auto_update";
+import { rebuildRedirect } from "./dynamicRoutes";
+import type { DynamicRoutes } from "./dynamicRoutes.d";
 import Avator from "./layouts/avatar";
 import LayoutCollapsed from "./layouts/collapsed";
-import type { DynamicRoutes } from "./dynamicRoutes.d";
-import { rebuildRedirect } from "./dynamicRoutes";
-import "./auto_update";
 import { getRole } from "./models/user";
 
 message.config({
@@ -26,6 +26,7 @@ export type InitialState = {
 };
 
 export const layout: RunTimeLayoutConfig = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [collapsed, setCollapsed] = useState<boolean>(false);
   return {
     rightContentRender: () => React.createElement(Avator),

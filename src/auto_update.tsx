@@ -60,7 +60,7 @@ function createUpdateContent(props: UpdateContentProps = {}): React.ReactNode {
     "系统有新版本，点击这里更新",
     React.createElement(ReloadOutlined, {
       style: { paddingLeft: "8px" },
-    })
+    }),
   );
 }
 
@@ -69,7 +69,7 @@ function autoUpdateNotify() {
     try {
       // 检查当前是否已经存在更新提示消息  如果已存在更新提示，直接返回
       const existingMessage = document.querySelector(
-        ".ant-message-notice-content"
+        ".ant-message-notice-content",
       );
       if (existingMessage?.textContent?.includes("系统有新版本")) {
         return;

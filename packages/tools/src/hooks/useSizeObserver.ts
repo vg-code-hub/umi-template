@@ -2,7 +2,7 @@
  * @Author: zdd
  * @Date: 2024-09-20 11:20:58
  * @LastEditors: zdd dongdong@grizzlychina.com
- * @LastEditTime: 2025-01-06 16:42:18
+ * @LastEditTime: 2025-02-27 11:23:01
  * @FilePath: useSizeObserver.ts
  */
 
@@ -16,7 +16,7 @@ export function useProTableSizeObserver<T>(
     wrapId?: string;
     totalHeight?: string;
     bottom?: number;
-  }
+  },
 ) {
   let { totalHeight, wrapId, bottom } = options ?? {};
   totalHeight ??= "100vh";
@@ -32,12 +32,31 @@ export function useProTableSizeObserver<T>(
       parentElement = document.getElementById(wrapId) as ParentElement;
     }
     let nodeList = Array.from(
-      parentElement.querySelectorAll<HTMLDivElement>(getWrapSelector(selector))
+      parentElement.querySelectorAll<HTMLDivElement>(getWrapSelector(selector)),
     );
     if (nodeList.length > 0) {
       return nodeList[nodeList.length - 1];
     }
   };
+
+  function calcTableHeight(
+    tableHeader: HTMLDivElement,
+    tableCardBody: HTMLDivElement,
+  ) {
+    let otherH = 0;
+
+    const { bottom } = tableHeader.getBoundingClientRect();
+    const { paddingBlockEnd } = getComputedStyle(tableCardBody, null);
+    otherH = bottom + parseInt(paddingBlockEnd);
+
+    const tablePagination = querySelector(".ant-table-pagination");
+    if (tablePagination) {
+      otherH += tablePagination?.offsetHeight ?? 24;
+      const { marginTop } = getComputedStyle(tablePagination, null);
+      otherH += parseInt(marginTop);
+    }
+    setSearchH(otherH);
+  }
 
   useEffect(() => {
     if (!actionRef.current) return;
@@ -68,25 +87,6 @@ export function useProTableSizeObserver<T>(
       }
     };
   }, [actionRef]);
-
-  function calcTableHeight(
-    tableHeader: HTMLDivElement,
-    tableCardBody: HTMLDivElement
-  ) {
-    let otherH = 0;
-
-    const { bottom } = tableHeader.getBoundingClientRect();
-    const { paddingBlockEnd } = getComputedStyle(tableCardBody, null);
-    otherH = bottom + parseInt(paddingBlockEnd);
-
-    const tablePagination = querySelector(".ant-table-pagination");
-    if (tablePagination) {
-      otherH += tablePagination?.offsetHeight ?? 24;
-      const { marginTop } = getComputedStyle(tablePagination, null);
-      otherH += parseInt(marginTop);
-    }
-    setSearchH(otherH);
-  }
 
   return {
     // 冗余高度: 4px

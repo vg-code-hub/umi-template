@@ -6,14 +6,12 @@
  * @FilePath: dynamicRoutes.ts
  */
 import access from "@/access";
-import type { DynamicRoutes } from "./dynamicRoutes.d";
-import { lazy } from "react";
-import { Outlet } from "umi";
 import { find } from "lodash-es";
+import type { DynamicRoutes } from "./dynamicRoutes.d";
 
 export function rebuildRedirect(
   routes: DynamicRoutes.ParsedRoutes,
-  baseRouteIdx = 2
+  baseRouteIdx = 2,
 ) {
   const accessControl: Record<string, boolean> = access();
   // 删除没有访问权限的路由
@@ -45,7 +43,7 @@ export function rebuildRedirect(
   redirectRoutes.forEach((route: any) => {
     const parentRoute = find(
       nonRedirectRoutes,
-      (r: any) => r.parentId === route.parentId
+      (r: any) => r.parentId === route.parentId,
     );
     if (!parentRoute) {
       routesToDelete.push(route.id);

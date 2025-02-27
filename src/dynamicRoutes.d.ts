@@ -7,7 +7,7 @@
  */
 // @/utils/dynamicRoutes/typing.d.ts
 
-import type { LazyExoticComponent, ComponentType } from "react";
+import type { ComponentType, LazyExoticComponent } from "react";
 import { Outlet } from "umi";
 
 declare namespace DynamicRoutes {

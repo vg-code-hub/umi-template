@@ -2,7 +2,7 @@
  * @Author: zdd
  * @Date: 2025-01-06 13:59:01
  * @LastEditors: zdd dongdong@grizzlychina.com
- * @LastEditTime: 2025-02-05 14:29:15
+ * @LastEditTime: 2025-02-27 11:27:37
  * @FilePath: .umirc.ts
  */
 import { defineConfig } from "umi";

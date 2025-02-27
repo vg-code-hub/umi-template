@@ -5,11 +5,11 @@
  * @LastEditTime: 2025-01-22 15:13:17
  * @FilePath: form.tsx
  */
-import { ProFormColumnsType, BetaSchemaForm } from "@ant-design/pro-components";
+import { BetaSchemaForm, ProFormColumnsType } from "@ant-design/pro-components";
 import { ProCrudFormProps } from "./type.d";
 
 export default function ProCrudForm<T, ValueType = "text">(
-  props: ProCrudFormProps<T>
+  props: ProCrudFormProps<T>,
 ) {
   return (
     <BetaSchemaForm<T, ValueType>

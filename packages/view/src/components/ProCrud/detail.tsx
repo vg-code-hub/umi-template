@@ -6,15 +6,15 @@
  * @FilePath: detail.tsx
  */
 import {
-  DrawerFormProps,
   DrawerForm,
-  ProDescriptions,
+  DrawerFormProps,
   ModalForm,
+  ProDescriptions,
 } from "@ant-design/pro-components";
-import { RecordType, ProCrudDetailProps } from "./type.d";
+import { ProCrudDetailProps, RecordType } from "./type.d";
 
 export default function ProCrudDetail<T extends RecordType, ValueType = "text">(
-  props: ProCrudDetailProps<T, ValueType>
+  props: ProCrudDetailProps<T, ValueType>,
 ) {
   const formProps = {
     title: props.title,

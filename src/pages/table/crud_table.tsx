@@ -67,7 +67,7 @@ export default () => {
         row: GithubIssueItem,
         index: number,
         action: any,
-        schema: { type: ProSchemaComponentTypes }
+        schema: { type: ProSchemaComponentTypes },
       ) => {
         if (schema.type === "descriptions") return row.title;
         return (
@@ -198,6 +198,7 @@ export default () => {
           onClick={() => {
             crudRef.current?.setFormOpen(row);
           }}
+          key="edit"
           type="link"
         >
           编辑
@@ -207,6 +208,7 @@ export default () => {
             crudRef.current?.setDetailOpen(row);
           }}
           type="link"
+          key="view"
         >
           查看
         </Button>,
@@ -240,6 +242,7 @@ export default () => {
           onClick={() => {
             crudRef.current?.setFormOpen();
           }}
+          key="create"
           type="primary"
         >
           新增

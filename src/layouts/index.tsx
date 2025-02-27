@@ -5,7 +5,7 @@
  * @LastEditTime: 2025-01-06 14:48:06
  * @FilePath: index.tsx
  */
-import { theme, ConfigProvider, ThemeConfig } from "antd";
+import { ConfigProvider, theme, ThemeConfig } from "antd";
 import { useKeepOutlets } from "umi";
 
 export const customTheme: ThemeConfig = {
